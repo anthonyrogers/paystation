@@ -164,29 +164,61 @@ public class PayStationImplTest {
     /**
      * Canceled entry does not add to the amount returned by empty
      */
-     @Test
-     public void cancelDoesNotAddToAmountReturnedByEmpty() throws IllegalCoinException {
-         ps.addPayment(5);
-         ps.buy();
+    @Test
+    public void cancelDoesNotAddToAmountReturnedByEmpty() throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.buy();
 
-         ps.addPayment(10);
-         ps.buy();
+        ps.addPayment(10);
+        ps.buy();
 
-         ps.addPayment(25);
-         ps.buy();
+        ps.addPayment(25);
+        ps.buy();
 
-         int total = ps.getTotalOfAllCoins();
-         assertEquals("Checking that the total value = 40", 40, total);
+        int total = ps.getTotalOfAllCoins();
+        assertEquals("Checking that the total value = 40", 40, total);
 
-         ps.addPayment(5);
-         ps.cancel();
+        ps.addPayment(5);
+        ps.cancel();
 
-         assertEquals("Checking that the total is still 40 after canceling the 5 cent payment", 40, total);
-     }
+        assertEquals("Checking that the total is still 40 after canceling the 5 cent payment", 40, total);
+    }
 
+    /**
+     * Call to empty resets the total to zero.
+     */
+    @Test
+    public void callToEmptyResetsTheTotalToZero() throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.buy();
 
+        ps.addPayment(10);
+        ps.buy();
 
+        ps.addPayment(25);
+        ps.buy();
 
+        int firstTestTotal = ps.getTotalOfAllCoins();
+        assertEquals("Checking that the total of all coins is 40 cents", 40, firstTestTotal);
+
+        ps.empty();
+        int secondTestTotal = ps.getTotalOfAllCoins();
+        assertEquals("Now checking that the total of all coins is 0 after calling empty()", 0, secondTestTotal);
+    }
+
+    /**
+     * Call to cancel returns a map containing one coin entered.
+     */
+    @Test
+    public void cancelReturnsOneCoin() throws IllegalCoinException {
+        Map<Integer, Integer> firstTestMap = new HashMap<>();
+        firstTestMap.put(5, 1);
+
+        ps.addPayment(5);
+        Map<Integer, Integer> secondTestMap = ps.cancel();
+
+        assertEquals("Testing if only one coin was entered but then cancel() was invoked", firstTestMap,secondTestMap);
+    }
 
     /**
      * Call to cancel returns a map containing a mixture of coins entered
@@ -195,13 +227,11 @@ public class PayStationImplTest {
     @Test
     public void shouldReturnAMapOfTheSpecificCoinsEnteredBeforeCancel() throws IllegalCoinException {
 
-        // First map to test
         Map<Integer, Integer> firstMapToTest = new HashMap<>();
         firstMapToTest.put(5, 1);
         firstMapToTest.put(10, 2);
         firstMapToTest.put(25, 1);
 
-        // Map using live code
         ps.addPayment(5);
         ps.addPayment(10);
         ps.addPayment(10);
