@@ -19,6 +19,8 @@
  */
 package paystation.domain;
 
+import java.util.Map;
+
 public interface PayStation {
 
     /**
@@ -49,5 +51,20 @@ public interface PayStation {
     /**
      * Cancel the present transaction. Resets the machine for a new transaction.
      */
-    public void cancel();
+    public Map<Integer, Integer> cancel();
+
+
+    /**
+     * Returns the total amount of money collected by the paystation since the last
+     * call and empties it, setting the total to zero.
+     *
+     * @return the total amount of money collected by the paystation since the last call
+     */
+    public int empty();
+
+    public int getIsertedSoFar();
+
+    public int getTimeBought();
+
+    public int getTotalOfAllCoins();
 }

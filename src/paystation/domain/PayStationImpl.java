@@ -1,5 +1,8 @@
 package paystation.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Implementation of the pay station.
  *
@@ -22,19 +25,28 @@ package paystation.domain;
 public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
+    private int totalOfAllCoins;
     private int timeBought;
+    private int fiveCounter, tenCounter, twentyfiveCounter;
+    private HashMap<Integer,Integer> coinMapper = new HashMap<>();
 
     @Override
-    public void addPayment(int coinValue)
-            throws IllegalCoinException {
+    public void addPayment(int coinValue) throws IllegalCoinException {
         switch (coinValue) {
-            case 5: break;
-            case 10: break;
-            case 25: break;
+            case 5:
+                coinMapper.put(5, ++fiveCounter);
+                break;
+            case 10:
+                coinMapper.put(10, ++tenCounter);
+                break;
+            case 25:
+                coinMapper.put(25, ++twentyfiveCounter);
+                break;
             default:
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
         insertedSoFar += coinValue;
+        totalOfAllCoins += coinValue;
         timeBought = insertedSoFar / 5 * 2;
     }
 
@@ -47,15 +59,43 @@ public class PayStationImpl implements PayStation {
     public Receipt buy() {
         Receipt r = new ReceiptImpl(timeBought);
         reset();
+
         return r;
     }
 
     @Override
-    public void cancel() {
+    public Map<Integer, Integer> cancel() {
+        Map<Integer, Integer> tempMap = new HashMap<>(coinMapper);
+        coinMapper.clear();
         reset();
+
+        return tempMap;
     }
-    
-    private void reset() {
+
+    @Override
+    public int empty() {
+        int gardaArmorTruckGuyWhoTransportsMoney = getTotalOfAllCoins();
+        reset();
+
+        return gardaArmorTruckGuyWhoTransportsMoney;
+    }
+
+    @Override
+    public int getIsertedSoFar() {
+        return insertedSoFar;
+    }
+
+    @Override
+    public int getTotalOfAllCoins() {
+        return totalOfAllCoins;
+    }
+
+    @Override
+    public int getTimeBought() {
+        return timeBought;
+    }
+
+    public void reset() {
         timeBought = insertedSoFar = 0;
     }
 }

@@ -128,8 +128,7 @@ public class PayStationImplTest {
      * Verify that cancel clears the pay station
      */
     @Test
-    public void shouldClearAfterCancel()
-            throws IllegalCoinException {
+    public void shouldClearAfterCancel() throws IllegalCoinException {
         ps.addPayment(10);
         ps.cancel();
         assertEquals("Cancel should clear display",
@@ -137,5 +136,27 @@ public class PayStationImplTest {
         ps.addPayment(25);
         assertEquals("Insert after cancel should work",
                 10, ps.readDisplay());
+    }
+
+    /**
+     * Verify that empty will return the total amount of money collected by paystation
+     * since the last call
+     * @return
+     */
+    @Test
+    public void empty() throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.addPayment(10);
+        ps.addPayment(25);
+        assertEquals("Should return 40 (5+10+25)", 40, ps.getIsertedSoFar());
+
+        // cancel() calls reset() which sets all globals to zero
+        ps.cancel();
+        assertEquals("insertedSoFar should be 0 after empty()", 0, ps.getIsertedSoFar());
+    }
+
+    @Test
+    public void cancel() {
+
     }
 }
