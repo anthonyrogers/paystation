@@ -46,7 +46,6 @@ public class PayStationImpl implements PayStation {
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
         insertedSoFar += coinValue;
-        totalOfAllCoins += coinValue;
         timeBought = insertedSoFar / 5 * 2;
     }
 
@@ -58,6 +57,7 @@ public class PayStationImpl implements PayStation {
     @Override
     public Receipt buy() {
         Receipt r = new ReceiptImpl(timeBought);
+        totalOfAllCoins += insertedSoFar;
         reset();
 
         return r;
@@ -66,7 +66,6 @@ public class PayStationImpl implements PayStation {
     @Override
     public Map<Integer, Integer> cancel() {
         Map<Integer, Integer> tempMap = new HashMap<>(coinMapper);
-        coinMapper.clear();
         reset();
 
         return tempMap;
@@ -76,6 +75,7 @@ public class PayStationImpl implements PayStation {
     public int empty() {
         int gardaArmorTruckGuyWhoTransportsMoney = getTotalOfAllCoins();
         reset();
+        resetTotalCoinAmount();
 
         return gardaArmorTruckGuyWhoTransportsMoney;
     }
@@ -97,5 +97,10 @@ public class PayStationImpl implements PayStation {
 
     public void reset() {
         timeBought = insertedSoFar = 0;
+        coinMapper.clear();
+    }
+
+    public void resetTotalCoinAmount() {
+        totalOfAllCoins = 0;
     }
 }

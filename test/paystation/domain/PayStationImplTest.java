@@ -15,9 +15,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PayStationImplTest {
 
-    PayStation ps;
+    private PayStation ps;
 
     @Before
     public void setup() {
@@ -144,19 +147,37 @@ public class PayStationImplTest {
      * @return
      */
     @Test
-    public void empty() throws IllegalCoinException {
+    public void shouldReturnTotalCoinValue() throws IllegalCoinException {
         ps.addPayment(5);
-        ps.addPayment(10);
-        ps.addPayment(25);
-        assertEquals("Should return 40 (5+10+25)", 40, ps.getIsertedSoFar());
+        ps.buy();
 
-        // cancel() calls reset() which sets all globals to zero
-        ps.cancel();
-        assertEquals("insertedSoFar should be 0 after empty()", 0, ps.getIsertedSoFar());
+        ps.addPayment(10);
+        ps.buy();
+
+        ps.addPayment(25);
+        ps.buy();
+
+        int total = ps.empty();
+        assertEquals("Total should be 40", 40, total);
     }
 
     @Test
-    public void cancel() {
+    public void shouldReturnAMapOfTheSpecificCoinsEnteredBeforeCancel() throws IllegalCoinException {
 
+        // First map to test
+        Map<Integer, Integer> firstMapToTest = new HashMap<>();
+        firstMapToTest.put(5, 1);
+        firstMapToTest.put(10, 2);
+        firstMapToTest.put(25, 1);
+
+        // Map using live code
+        ps.addPayment(5);
+        ps.addPayment(10);
+        ps.addPayment(10);
+        ps.addPayment(25);
+
+        Map<Integer, Integer> mapForTest = (HashMap<Integer, Integer>) ps.cancel();
+        
+        assertEquals(firstMapToTest, mapForTest);
     }
 }
