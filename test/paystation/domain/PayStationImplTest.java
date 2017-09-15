@@ -161,6 +161,37 @@ public class PayStationImplTest {
         assertEquals("Total should be 40", 40, total);
     }
 
+    /**
+     * Canceled entry does not add to the amount returned by empty
+     */
+     @Test
+     public void cancelDoesNotAddToAmountReturnedByEmpty() throws IllegalCoinException {
+         ps.addPayment(5);
+         ps.buy();
+
+         ps.addPayment(10);
+         ps.buy();
+
+         ps.addPayment(25);
+         ps.buy();
+
+         int total = ps.getTotalOfAllCoins();
+         assertEquals("Checking that the total value = 40", 40, total);
+
+         ps.addPayment(5);
+         ps.cancel();
+
+         assertEquals("Checking that the total is still 40 after canceling the 5 cent payment", 40, total);
+     }
+
+
+
+
+
+    /**
+     * Call to cancel returns a map containing a mixture of coins entered
+     * @throws IllegalCoinException
+     */
     @Test
     public void shouldReturnAMapOfTheSpecificCoinsEnteredBeforeCancel() throws IllegalCoinException {
 
@@ -177,7 +208,7 @@ public class PayStationImplTest {
         ps.addPayment(25);
 
         Map<Integer, Integer> mapForTest = (HashMap<Integer, Integer>) ps.cancel();
-        
+
         assertEquals(firstMapToTest, mapForTest);
     }
 }
