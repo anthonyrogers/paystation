@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class PayStationImplTest {
 
-    private PayStation ps;
+    private PayStationImpl ps;
 
     @Before
     public void setup() {
@@ -142,7 +142,6 @@ public class PayStationImplTest {
     /**
      * Verify that empty will return the total amount of money collected by paystation
      * since the last call
-     * @return
      */
     @Test
     public void shouldReturnTotalCoinValue() throws IllegalCoinException {
@@ -222,7 +221,6 @@ public class PayStationImplTest {
 
     /**
      * Call to cancel returns a map containing a mixture of coins entered
-     * @throws IllegalCoinException
      */
     @Test
     public void shouldReturnAMapOfTheSpecificCoinsEnteredBeforeCancel() throws IllegalCoinException {
@@ -254,7 +252,6 @@ public class PayStationImplTest {
 
         // Simulate a live transaction
         ps.addPayment(25);
-        ps.buy();
         ps.addPayment(10);
         ps.buy();
 
@@ -298,5 +295,4 @@ public class PayStationImplTest {
         Map<Integer, Integer> testHashMap = ps.cancel();
         assertTrue(testHashMap.isEmpty());
     }
-
 }

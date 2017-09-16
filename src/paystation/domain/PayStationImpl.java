@@ -22,6 +22,15 @@ import java.util.Map;
  * implied. You may study, use, modify, and distribute it for non-commercial
  * purposes. For any commercial use, see http://www.baerbak.com/
  */
+
+/**
+ * CIS 3238 Lab 2
+ * Philip Cappelli
+ *
+ * This assignement added the empty() and modified the cancel() method.  The cancel method
+ * will reset the PayStation so it's ready for a new transaction. The method will also return a
+ * Map object
+ */
 public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
@@ -80,17 +89,17 @@ public class PayStationImpl implements PayStation {
         return gardaArmorTruckGuyWhoTransportsMoney;
     }
 
-    @Override
+    //@Override
     public int getInsertedSoFar() {
         return insertedSoFar;
     }
 
-    @Override
+    //@Override
     public int getTotalOfAllCoins() {
         return totalOfAllCoins;
     }
 
-    @Override
+    //@Override
     public int getTimeBought() {
         return timeBought;
     }

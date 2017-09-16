@@ -60,12 +60,4 @@ public interface PayStation {
      * @return the total amount of money collected by the paystation since the last call
      */
     public int empty();
-
-    // Still need to add comments.... i know this is bad blah blah but i was in the groove.
-
-    public int getInsertedSoFar();
-
-    public int getTimeBought();
-
-    public int getTotalOfAllCoins();
 }
