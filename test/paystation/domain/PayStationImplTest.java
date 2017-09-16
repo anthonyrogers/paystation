@@ -146,12 +146,16 @@ public class PayStationImplTest {
     @Test
     public void shouldReturnTotalCoinValue() throws IllegalCoinException {
 
+        // PayStation: LIGHTS! CAMERA! ACTION!
         ps.addPayment(5);
         ps.addPayment(10);
         ps.addPayment(25);
         ps.buy();
 
+        // Set total to the value empty() is returning
         int total = ps.empty();
+
+        // Test if the value is what was entered
         assertEquals("Total should be 40", 40, total);
     }
 
