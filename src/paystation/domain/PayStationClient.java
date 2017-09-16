@@ -17,7 +17,7 @@ public class PayStationClient {
         // Turning on the PayStation (Beep Boop Boop).....
         PayStationImpl payStation = new PayStationImpl();
 
-        // Just wanted to prove that the object iss never null
+        // Just wanted to prove that the object is never null
         Map<Integer, Integer> payStation1 = payStation.cancel();
 
         if (payStation1 == null) {
