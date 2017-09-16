@@ -31,10 +31,10 @@ import java.util.Map;
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
- * This assignement added the empty() and modified the cancel() method.  The cancel method
- * will reset the PayStation so it's ready for a new transaction. The method will also return a
- * Map object.  I also added a few other methods to make certains tasks easier depending on what
- * value was needed for the logic.
+ * This assignement added the empty() and modified the cancel() method.  The cancel method will
+ * reset the PayStation so it's ready for a new transaction. The method will also return a Map.
+ * I also added a few other methods to make certains tasks easier depending on what value was
+ * needed for the logic. 
  */
 public class PayStationImpl implements PayStation {
 
