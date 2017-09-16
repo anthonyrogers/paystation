@@ -29,7 +29,7 @@ public class PayStationClient {
         System.out.println("Displaying that empty()'s return value equals currentCoinValueBeingReturned() -----> " + dispensedCoins);
 
         // Showing the value of insertedSoFar is 0 after calling empty()
-        System.out.println("Showing the value of insertedSoFar is 0 after calling empty() -----> " + payStation.getIsertedSoFar());
+        System.out.println("Showing the value of insertedSoFar is 0 after calling empty() -----> " + payStation.getInsertedSoFar());
 
         // Showing the value of totalBought is also 0 after calling empty()
         System.out.println("Showing the value of totalBought is also 0 after calling empty() -----> " + payStation.getTimeBought());

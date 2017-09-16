@@ -81,7 +81,7 @@ public class PayStationImpl implements PayStation {
     }
 
     @Override
-    public int getIsertedSoFar() {
+    public int getInsertedSoFar() {
         return insertedSoFar;
     }
 
@@ -95,12 +95,12 @@ public class PayStationImpl implements PayStation {
         return timeBought;
     }
 
-    public void reset() {
+    private void reset() {
         timeBought = insertedSoFar = 0;
         coinMapper.clear();
     }
 
-    public void resetTotalCoinAmount() {
+    private void resetTotalCoinAmount() {
         totalOfAllCoins = 0;
     }
 }

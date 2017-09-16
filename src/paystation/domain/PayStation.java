@@ -53,7 +53,6 @@ public interface PayStation {
      */
     public Map<Integer, Integer> cancel();
 
-
     /**
      * Returns the total amount of money collected by the paystation since the last
      * call and empties it, setting the total to zero.
@@ -62,7 +61,9 @@ public interface PayStation {
      */
     public int empty();
 
-    public int getIsertedSoFar();
+    // Still need to add comments.... i know this is bad blah blah but i was in the groove.
+
+    public int getInsertedSoFar();
 
     public int getTimeBought();
 
