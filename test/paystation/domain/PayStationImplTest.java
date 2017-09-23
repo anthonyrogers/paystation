@@ -24,7 +24,15 @@ public class PayStationImplTest {
 
     @Before
     public void setup() {
-        ps = new PayStationImpl();
+        ps = new PayStationImpl(new One2OneRateStrategy());
+    }
+
+    @Test
+    public void shouldAcceptLegalCoins() throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.addPayment(10);
+        ps.addPayment(25);
+        assertEquals("Should accept 5, 10, and 25 cents", 5 + 10 + 25, ps.readDisplay());
     }
 
     /**
@@ -34,7 +42,7 @@ public class PayStationImplTest {
     public void shouldDisplay2MinFor5Cents() throws IllegalCoinException {
         ps.addPayment(5);
         assertEquals("Should display 2 min for 5 cents",
-                2, ps.readDisplay());
+                5, ps.readDisplay());
     }
 
     /**
@@ -44,7 +52,7 @@ public class PayStationImplTest {
     public void shouldDisplay10MinFor25Cents() throws IllegalCoinException {
         ps.addPayment(25);
         assertEquals("Should display 10 min for 25 cents",
-                10, ps.readDisplay());
+                25, ps.readDisplay());
     }
 
     /**
@@ -63,7 +71,13 @@ public class PayStationImplTest {
         ps.addPayment(10);
         ps.addPayment(25);
         assertEquals("Should display 14 min for 10+25 cents",
-                14, ps.readDisplay());
+                10 + 25, ps.readDisplay());
+    }
+
+    @Test
+    public void shouldStoreTimeInReceipt() {
+        Receipt receipt = new ReceiptImpl(30);
+        assertEquals("Receipt can store 30 minute value", 30, receipt.value());
     }
 
     /**
@@ -79,7 +93,7 @@ public class PayStationImplTest {
         assertNotNull("Receipt reference cannot be null",
                 receipt);
         assertEquals("Receipt value must be 16 min.",
-                16, receipt.value());
+                5 + 10 + 25, receipt.value());
     }
 
     /**
@@ -98,7 +112,7 @@ public class PayStationImplTest {
 
         Receipt receipt;
         receipt = ps.buy();
-        assertEquals(40, receipt.value());
+        assertEquals(5*10+2*25, receipt.value());
     }
 
     /**
@@ -116,10 +130,10 @@ public class PayStationImplTest {
         ps.addPayment(10);
         ps.addPayment(25);
         assertEquals("Next add payment should display correct time",
-                14, ps.readDisplay());
+                10 + 25, ps.readDisplay());
         Receipt r = ps.buy();
         assertEquals("Next buy should return valid receipt",
-                14, r.value());
+                10 + 25, r.value());
         assertEquals("Again, display should be cleared",
                 0, ps.readDisplay());
     }
@@ -136,7 +150,7 @@ public class PayStationImplTest {
                 0, ps.readDisplay());
         ps.addPayment(25);
         assertEquals("Insert after cancel should work",
-                10, ps.readDisplay());
+                25, ps.readDisplay());
     }
 
     /**
@@ -298,5 +312,24 @@ public class PayStationImplTest {
         // and I want to prove if that map is empty...so thats why I did that.
         Map<Integer, Integer> testHashMap = ps.cancel();
         assertTrue(testHashMap.isEmpty());
+    }
+
+    /* Moved to TestIntegration class
+    @Test
+    public void shouldIntegrateProgressiveRateCorrectly() throws IllegalCoinException {
+
+        ps = new PayStationImpl(new ProgressiveRateStrategy());
+        addOneDollar();
+        addOneDollar();
+        assertEquals("Progressive Rate: $2 should give 75 min ", 75, ps.readDisplay());
+    }
+    */
+
+    public void addHalfDollar() throws IllegalCoinException{
+        ps.addPayment(25); ps.addPayment(25);
+    }
+
+    public void addOneDollar() throws IllegalCoinException {
+        addHalfDollar(); addHalfDollar();
     }
 }

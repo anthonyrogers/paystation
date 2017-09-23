@@ -46,6 +46,13 @@ public class PayStationImpl implements PayStation {
     // Global HashMap<Integer, Integer> to keep track of inserted coins
     private HashMap<Integer,Integer> coinMapper = new HashMap<>();
 
+    // The rate strategy calculations object
+    private RateStrategy rateStrategy;
+
+    public PayStationImpl(RateStrategy rateStrategy) {
+        this.rateStrategy = rateStrategy;
+    }
+
     @Override
     public void addPayment(int coinValue) throws IllegalCoinException {
 
@@ -71,7 +78,8 @@ public class PayStationImpl implements PayStation {
         insertedSoFar += coinValue;
 
         // Calculate the time bought to display on the screen
-        timeBought = insertedSoFar / 5 * 2;
+        //timeBought = insertedSoFar / 5 * 2;
+        timeBought = rateStrategy.calculateTime(insertedSoFar);
     }
 
     @Override

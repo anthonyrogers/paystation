@@ -8,7 +8,7 @@ import java.util.Map;
  *
  * Written by: Philip Cappelli
  */
-
+/**
 public class PayStationClient {
 
     // Will throw an exception is an incorrect coin is given as input
@@ -54,4 +54,6 @@ public class PayStationClient {
         // Showing the value of totalBought is also 0 after calling empty()
         System.out.println("Showing value of totalBought is also 0 after calling empty() -----> " + payStation.getTimeBought());
     }
+
 }
+ */
