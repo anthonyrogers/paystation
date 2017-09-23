@@ -3,7 +3,6 @@ package paystation.domain;
 public class ProgressiveRateStrategy implements RateStrategy {
 
     public int calculateTime(int amount) {
-
         int time = 0;
         if (amount >= 150 + 200) {
             amount -= 350;
