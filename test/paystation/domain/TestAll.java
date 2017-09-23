@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
               { PayStationImplTest.class,
                 LinearRateStrategyTest.class,
                 ProgressiveRateStrategyTest.class,
+                TestAlternatingRate.class,
                 TestIntegration.class } )
 
 public class TestAll {
