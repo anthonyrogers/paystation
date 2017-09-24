@@ -2,6 +2,7 @@ package paystation.domain;
 import paystation.domain.Strategies.*;
 import paystation.domain.Utility.PayStationImpl;
 
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,19 @@ public class PayStationClient {
                     delegate.printReceipt(payStation);
                     break;
                 case 4:
-                    delegate.printCancelMapOfCoins(payStation);
+                    Map<Integer, Integer> cancelMap = payStation.cancel();
+                    int nickels, dimes, quarters, total;
+
+                    if (!cancelMap.isEmpty()) {
+                        nickels = cancelMap.get(5);
+                        dimes = cancelMap.get(10);
+                        quarters = cancelMap.get(25);
+                        total = (5 * nickels) + (10 * dimes) + (25 * quarters);
+
+                        System.out.println("\nNumber of nickels: " + nickels +
+                                "\nNumber of dimes:   " + dimes + " \nNumber of quarters: " + quarters);
+                        System.out.println("Total change returned: " + total);
+                    }
                     break;
                 case 5:
                     System.out.println("Enter 1 for AlphaTown, 2 for Betatown, or 3 for GamaTown: ");

@@ -11,6 +11,4 @@ import org.junit.runners.Suite;
                 TestAlternatingRate.class,
                 TestIntegration.class } )
 
-public class TestAll {
-
-}
+public class TestAll {}
