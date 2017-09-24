@@ -1,7 +1,11 @@
-package paystation.domain;
+package paystation.domain.Utility;
 
 import paystation.domain.Strategies.LinearRateStrategy;
 import paystation.domain.Strategies.RateStrategy;
+import paystation.domain.Utility.IllegalCoinException;
+import paystation.domain.Utility.PayStation;
+import paystation.domain.Utility.Receipt;
+import paystation.domain.Utility.ReceiptImpl;
 
 import java.util.HashMap;
 import java.util.Map;

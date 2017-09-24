@@ -1,5 +1,6 @@
 package paystation.domain;
 import paystation.domain.Strategies.*;
+import paystation.domain.Utility.PayStationImpl;
 
 import java.util.Scanner;
 

@@ -1,5 +1,9 @@
 package paystation.domain;
 
+import paystation.domain.Utility.IllegalCoinException;
+import paystation.domain.Utility.PayStation;
+import paystation.domain.Utility.Receipt;
+
 import java.util.Map;
 import java.util.Scanner;
 

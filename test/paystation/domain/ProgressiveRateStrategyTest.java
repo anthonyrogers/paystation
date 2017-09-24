@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import paystation.domain.Strategies.ProgressiveRateStrategy;
 import paystation.domain.Strategies.RateStrategy;
+import paystation.domain.Utility.IllegalCoinException;
 
 import static org.junit.Assert.*;
 

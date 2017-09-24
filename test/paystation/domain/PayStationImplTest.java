@@ -14,6 +14,10 @@ package paystation.domain;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import paystation.domain.Utility.IllegalCoinException;
+import paystation.domain.Utility.PayStationImpl;
+import paystation.domain.Utility.Receipt;
+import paystation.domain.Utility.ReceiptImpl;
 
 import java.util.HashMap;
 import java.util.Map;

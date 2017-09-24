@@ -3,6 +3,9 @@ package paystation.domain;
 import org.junit.Test;
 import paystation.domain.Strategies.LinearRateStrategy;
 import paystation.domain.Strategies.ProgressiveRateStrategy;
+import paystation.domain.Utility.IllegalCoinException;
+import paystation.domain.Utility.PayStation;
+import paystation.domain.Utility.PayStationImpl;
 
 import static junit.framework.TestCase.assertEquals;
 
