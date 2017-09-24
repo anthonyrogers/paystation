@@ -1,4 +1,4 @@
-package paystation.domain;
+package paystation.domain.Strategies;
 
 public class ProgressiveRateStrategy implements RateStrategy {
 

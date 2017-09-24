@@ -3,6 +3,8 @@ package paystation.domain;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import paystation.domain.Strategies.ProgressiveRateStrategy;
+import paystation.domain.Strategies.RateStrategy;
 
 import static org.junit.Assert.*;
 

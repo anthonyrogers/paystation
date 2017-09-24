@@ -1,6 +1,12 @@
 package paystation.domain;
 
+import paystation.domain.Strategies.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * This is just a client-driver simulation for the PayStation which uses methods
@@ -8,52 +14,89 @@ import java.util.Map;
  *
  * Written by: Philip Cappelli
  */
-/**
 public class PayStationClient {
 
-    // Will throw an exception is an incorrect coin is given as input
-    public static void main(String[] args) throws IllegalCoinException {
+    public static void main(String[] args) {
 
-        // Turning on the PayStation (Beep Boop Boop).....
         PayStationImpl payStation = new PayStationImpl();
+        Scanner input = new Scanner(System.in);
+        int selection;
 
-        // Just wanted to prove that the object is never null
-        Map<Integer, Integer> payStation1 = payStation.cancel();
+        do {
+            displayMenu();
+            selection = input.nextInt();
 
-        if (payStation1 == null) {
-            System.out.println("PayStation doesn't exist! DO NOT INSERT MONEY!");
-            System.exit(0);
-        }
+            switch (selection) {
+                case 1:
+                    int coinsBeingAdded;
+                    boolean stillPaying = true;
 
-        // Giving the PayStation some coins...well attempting to at least
-        try {
-            payStation.addPayment(5);
-            payStation.addPayment(5);
-            payStation.addPayment(10);
-            payStation.addPayment(25);
-            payStation.addPayment(25);
-            payStation.buy();
-        } catch (IllegalCoinException e) {
-            e.printStackTrace();
-        }
+                    while (stillPaying) {
+                        System.out.println("PayStation only accepts 5, 10, 25 cent values");
+                        System.out.println("Enter 0 when complete ");
 
-        // Testing that the map returned is empty after calling cancel()
-        System.out.println(payStation.getTotalOfAllCoins());
+                        coinsBeingAdded = input.nextInt();
+                        if (coinsBeingAdded == 0) {
+                            stillPaying = false;
+                        } else {
+                            try {
+                                payStation.addPayment(coinsBeingAdded);
+                            } catch (IllegalCoinException e) {
+                                System.out.println("Invalid coin, ill let it slide this one time...");
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    int time = payStation.readDisplay();
+                    System.out.println("Current time purchased: " + time);
+                    break;
+                case 3:
+                    Receipt receipt = payStation.buy();
+                    System.out.println(receipt.value());
+                    break;
+                case 4:
+                    Map<Integer, Integer> cancelMap = payStation.cancel();
+                    System.out.println(cancelMap);
+                    break;
+                case 5:
+                    System.out.println("Enter 1 for AlphaTown, 2 for Betatown, or 3 for GamaTown: ");
+                    int userChosenRateStrategy = input.nextInt();
 
-        // Displaying the total amount of coins paid to the PayStation
-        int currentCoinValueBeingReturned = payStation.getTotalOfAllCoins();
-        System.out.println("Displaying total amount of coins paid to the PayStation ----->  " + currentCoinValueBeingReturned);
-
-        // Displaying that empty()'s return value equals currentCoinValueBeingReturned()
-        int dispensedCoins = payStation.empty();
-        System.out.println("Displaying empty()'s return value equals currentCoinValueBeingReturned() -----> " + dispensedCoins);
-
-        // Showing the value of insertedSoFar is 0 after calling empty()
-        System.out.println("Showing value of insertedSoFar is 0 after calling empty() -----> " + payStation.getInsertedSoFar());
-
-        // Showing the value of totalBought is also 0 after calling empty()
-        System.out.println("Showing value of totalBought is also 0 after calling empty() -----> " + payStation.getTimeBought());
+                    if (userChosenRateStrategy == 1) {
+                        payStation = new PayStationImpl(new LinearRateStrategy());
+                    } else if (userChosenRateStrategy == 2) {
+                        System.out.println("Betatown woot woooooot");
+                        payStation = new PayStationImpl(new ProgressiveRateStrategy());
+                    } else if (userChosenRateStrategy == 3) {
+                        payStation = new PayStationImpl(new AlternatingRateStrategy(new LinearRateStrategy(),
+                                                                                    new ProgressiveRateStrategy(),
+                                                                                    new ClockBasedDecisionStrategy()));
+                    }
+                    break;
+                default:
+                    System.out.println("Please select only between options 1 through 4");
+            }
+        } while (selection != 4);
     }
 
+    private static void displayMenu() {
+        System.out.println("1. Deposit Coins");
+        System.out.println("2. Display");
+        System.out.println(("3. Buy Ticket"));
+        System.out.println("4. Cancel");
+        System.out.println("5. Change Rate Strategy");
+    }
 }
- */
+
+
+
+
+
+
+
+
+
+
+
+

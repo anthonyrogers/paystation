@@ -1,4 +1,4 @@
-package paystation.domain;
+package paystation.domain.Strategies;
 
 public class LinearRateStrategy implements RateStrategy {
     public int calculateTime(int amount) {

@@ -1,5 +1,8 @@
 package paystation.domain;
 
+import paystation.domain.Strategies.LinearRateStrategy;
+import paystation.domain.Strategies.RateStrategy;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +54,10 @@ public class PayStationImpl implements PayStation {
 
     public PayStationImpl(RateStrategy rateStrategy) {
         this.rateStrategy = rateStrategy;
+    }
+
+    public PayStationImpl() {
+        rateStrategy = new LinearRateStrategy();
     }
 
     @Override

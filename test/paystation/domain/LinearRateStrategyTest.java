@@ -3,6 +3,8 @@ package paystation.domain;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import paystation.domain.Strategies.LinearRateStrategy;
+import paystation.domain.Strategies.RateStrategy;
 
 import static org.junit.Assert.*;
 
@@ -20,5 +22,4 @@ public class LinearRateStrategyTest {
     @After
     public void tearDown() throws Exception {
     }
-
 }

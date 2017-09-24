@@ -1,5 +1,7 @@
 package paystation.domain;
 
+import paystation.domain.Strategies.WeekendDecisionStrategy;
+
 public class FixedDecisionStrategy implements WeekendDecisionStrategy {
     private boolean isWeekend;
 
