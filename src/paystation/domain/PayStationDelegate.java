@@ -4,8 +4,6 @@ import paystation.domain.Utility.IllegalCoinException;
 import paystation.domain.Utility.PayStation;
 import paystation.domain.Utility.Receipt;
 
-import java.io.IOException;
-import java.util.Map;
 import java.util.Scanner;
 
 public class PayStationDelegate {
@@ -52,40 +50,5 @@ public class PayStationDelegate {
         System.out.println("\n$$$ PayStation Parking Receipt $$$");
         System.out.println("---------- Time: " + receipt.value() + " mins ----------");
         System.out.println("     :) Have a Great Day! :)\n");
-    }
-
-    public void printCancelMapOfCoins(PayStation payStation)  {
-        Map<Integer, Integer> cancelMap = payStation.cancel();
-        System.out.println(cancelMap);
-
-        int nickels, dimes, quarters;
-        int total;
-
-
-            nickels = cancelMap.get(5);
-            dimes = cancelMap.get(10);
-            quarters = cancelMap.get(25);
-            total = (5 * nickels) + (10 * dimes) + (25 * quarters);
-
-            System.out.println("\nTotal change returned: " + total);
-            System.out.println("\nNumber of nickels: " + nickels +
-                    "\nNumber of dimes:   " + dimes + " \nNumber of quarters: " + quarters);
-
-
-
-        /*
-        try {
-            Integer nickels = cancelMap.get(5);
-            Integer dimes = cancelMap.get(10);
-            Integer quarters = cancelMap.get(25);
-
-            int total = (5 * nickels) + (10 * dimes) + (25 * quarters);
-            System.out.println("\nTotal change returned: " + total);
-            System.out.println("\nNumber of nickels: " + nickels +
-                    "\nNumber of dimes:   " + dimes + " \nNumber of quarters: " + quarters);
-        } catch (NullPointerException e) {
-            System.out.println("\nNo amount to return");
-        }
-        */
     }
 }

@@ -14,7 +14,6 @@ public class AlternatingRateStrategy implements RateStrategy {
     }
 
     public int calculateTime(int amount) {
-
         if (decisionStrategy.isWeekend()) {
             currentState = weekendStrategy;
         } else {
