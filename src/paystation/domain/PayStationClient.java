@@ -2,9 +2,6 @@ package paystation.domain;
 
 import paystation.domain.Strategies.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -66,7 +63,6 @@ public class PayStationClient {
                     if (userChosenRateStrategy == 1) {
                         payStation = new PayStationImpl(new LinearRateStrategy());
                     } else if (userChosenRateStrategy == 2) {
-                        System.out.println("Betatown woot woooooot");
                         payStation = new PayStationImpl(new ProgressiveRateStrategy());
                     } else if (userChosenRateStrategy == 3) {
                         payStation = new PayStationImpl(new AlternatingRateStrategy(new LinearRateStrategy(),
