@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class PayStationDelegate {
     public  void displayMenu() {
+        System.out.println("\n|  Thank you for choosing PayStation!   |");
+        System.out.println("| Select an option below to get started | \n");
         System.out.println("1. Deposit Coins");
         System.out.println("2. Display");
         System.out.println("3. Buy Ticket");
@@ -48,7 +50,7 @@ public class PayStationDelegate {
         Receipt receipt = payStation.buy();
         System.out.println("\n$$$ PayStation Parking Receipt $$$");
         System.out.println("---------- Time: " + receipt.value() + " mins ----------");
-        System.out.println("     :)1 Have A Great Day! :)\n");
+        System.out.println("     :) Have a Great Day! :)\n");
     }
 
     public void printCancelMapOfCoins(PayStation payStation) {
