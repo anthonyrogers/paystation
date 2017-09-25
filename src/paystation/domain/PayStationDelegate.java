@@ -23,7 +23,7 @@ public class PayStationDelegate {
         System.out.println("Current time purchased: " + time);
     }
 
-    public  void addCoinsBeingInserted(PayStation payStation) {
+    public void addCoinsBeingInserted(PayStation payStation) {
         Scanner input = new Scanner(System.in);
         int coinsBeingAdded;
         boolean stillPaying = true;

@@ -33,18 +33,10 @@ public class PayStationClient {
                     delegate.printReceipt(payStation);
                     break;
                 case 4:
-                    Map<Integer, Integer> cancelMap = payStation.cancel();
-                    int nickels, dimes, quarters, total;
-
-                    if (!cancelMap.isEmpty()) {
-                        nickels = cancelMap.get(5);
-                        dimes = cancelMap.get(10);
-                        quarters = cancelMap.get(25);
-                        total = (5 * nickels) + (10 * dimes) + (25 * quarters);
-
-                        System.out.println("\nNumber of nickels: " + nickels +
-                                "\nNumber of dimes:   " + dimes + " \nNumber of quarters: " + quarters);
-                        System.out.println("Total change returned: " + total);
+                    System.out.println("\n***This transaction has been canceled***\n");
+                    for (Map.Entry<Integer, Integer> entry : payStation.cancel().entrySet()) {
+                        System.out.println("Coin Value: " + entry.getKey() + " --- Returned Amount "
+                        + entry.getValue());
                     }
                     break;
                 case 5:
