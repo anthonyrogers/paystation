@@ -51,14 +51,21 @@ public class PayStationClient {
                     System.out.println("Enter 1 for AlphaTown, 2 for Betatown, or 3 for GamaTown: ");
                     int userChosenRateStrategy = input.nextInt();
 
-                    if (userChosenRateStrategy == 1) {
-                        payStation = new PayStationImpl(new LinearRateStrategy());
-                    } else if (userChosenRateStrategy == 2) {
-                        payStation = new PayStationImpl(new ProgressiveRateStrategy());
-                    } else if (userChosenRateStrategy == 3) {
-                        payStation = new PayStationImpl(new AlternatingRateStrategy(new LinearRateStrategy(),
-                                                                                    new ProgressiveRateStrategy(),
-                                                                                    new ClockBasedDecisionStrategy()));
+                    // Nested switch statement to take care of rate strategy changes
+                    switch (userChosenRateStrategy) {
+                        case 1:
+                            payStation = new PayStationImpl(new LinearRateStrategy());
+                            break;
+                        case 2:
+                            payStation = new PayStationImpl(new ProgressiveRateStrategy());
+                            break;
+                        case 3:
+                            payStation = new PayStationImpl(new AlternatingRateStrategy(new LinearRateStrategy(),
+                                                                                        new ProgressiveRateStrategy(),
+                                                                                        new ClockBasedDecisionStrategy()));
+                            break;
+                        default:
+                            System.out.println("Not a valid selection... Returning to menu");
                     }
                     break;
                 case 6:
