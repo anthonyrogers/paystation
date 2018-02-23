@@ -37,6 +37,7 @@ public interface PayStation {
      * the amount of parking time accumulated so far based on inserted payment.
      *
      * @return the number to display on the pay station display
+     * test
      */
     public int readDisplay();
 
