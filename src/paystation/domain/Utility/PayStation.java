@@ -38,6 +38,7 @@ public interface PayStation {
      *
      * @return the number to display on the pay station display
      * test
+     * another test
      */
     public int readDisplay();
 
